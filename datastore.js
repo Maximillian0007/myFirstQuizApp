@@ -13,21 +13,21 @@ let STORE = [
 },
 //question 2
 {
-    "question" : "Which is the main assault rifle used by the Russian army?",
+    "question" : "In what year was Harley Davidson founded?",
     "answers" : [
-        "Ak-47",
-        "Famas",
-        "Type-95",
-        "Ak-74"
+        "1903",
+        "1926",
+        "1985",
+        "1964"
     ],
-    "correctAnswer" : "Ak-74"
+    "correctAnswer" : "1903"
 
 },
 //question 3
 {
     "question" : "Which is the most dominant martial arts in the UFC?",
     "answers" : [
-        "boxing",
+        "Boxing",
         "Brazilian Jiu-Jitsu",
         "Muay-Thai",
         "Krav-Maga"
@@ -74,3 +74,19 @@ let STORE = [
 
 
 ]; 
+
+const STATE = {
+    render: {
+      startPage: true,
+      questionPage: false,
+      answerPage: false,
+      resultsPage: false,
+      noAnswerPage: false
+    },
+  
+    currentQuestion: 0,
+    currentScore: 0,
+    currentQuestionCorrect: false,
+    noAnswerSubmitted: false,
+    onLastQuestion: false
+  };

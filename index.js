@@ -1,88 +1,95 @@
+//document ready
 $(function () {
 
+    
 
     let questionNumber = 0;
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
 
     //the function that returns the question 
     function getQuestion() {
 
         let question = STORE[questionNumber].question;
 
-        questionNumber++
-
         return question
-
-
+      
     }
 
-    //this is the function that returns the answers 
+    //this is the function that displays potential answers 
     function getAnswers() {
 
         let answers =
             `
-            
-            <form>
+            <form class="form">
             <fieldset>
             <input type="radio" name="answer-cirlce" id="0">${STORE[questionNumber].answers[0]}</input>
             <input type="radio" name="answer-cirlce" id="1">${STORE[questionNumber].answers[1]}</input>
             <input type="radio" name="answer-cirlce" id="2">${STORE[questionNumber].answers[2]}</input>
             <input type="radio" name="answer-cirlce" id="3">${STORE[questionNumber].answers[3]}</input>
-            <button class="jdg" type="" name="submit">jdg</button>
+            <button class="submit" type="" name="submit">submit</button>
             </fieldset>
             </form>
+            `      
             
+            return answers;
 
-            `
-            // $('.submit').click(function(){
+            $(".answers").html(answers);
 
-            //     submitAnswer();
-        
-            // });
 
-        return answers;
     }
 
-    getAnswers();
+//display progress correct Vs Incorrect answers 
 
-    //submit answer
+
+            function trackProgress () {
+                
+                let progress = 
+    
+                `
+                <form>
+                <p>Correct answers: ${correctAnswers}</p>
+                <p>Incorrect answers: ${incorrectAnswers}</p>
+                </form>
+                `
+                
+                return progress;
+            }
+
+//submit answer button and update the progress tracker 
     function submitAnswer() {
-         $('form').on('jdg', function (event) {
-             event.preventDefault();
-             
-            console.log("test");
-            
-            // event.preventDefault();
-            //  let selected = $('input:checked');
-            //  let answer = selected.val();
-            //  let correctAnswer = `${STORE[questionNumber].correctAnswer}`;
-            //  if (answer === correctAnswer) {
-            //     selected.parent().addClass('correct');
-            //     ifAnswerIsCorrect();
-            //   } else {
-            //     selected.parent().addClass('wrong');
-            //     ifAnswerIsWrong();
-            //   }
+         $('.answers').on('submit', function() {
+            event.preventDefault();
+            let selected = $('input:checked');
+
+            let answer = selected.val();
+
+            if (answer === STORE[questionNumber].correctAnswer) {
+                correctAnswers++;
+            }      
+        
 
          }); 
-
-        
   
      }
 
-    //when the button is clicked, display the question and answers 
+     getAnswers();
+
+    //when the next button is clicked, display the question and answers 
     $('.next').click(function () {
 
         $('.question').html(getQuestion);
 
         $('.answers').html(getAnswers);
 
+        $('.progress').html(trackProgress);
+
+        questionNumber++
 
 
     });
 
     submitAnswer();
-
-
 
 
 
